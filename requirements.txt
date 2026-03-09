@@ -3,3 +3,4 @@ google-generativeai
 python-docx
 python-pptx
 requests
+Flask
