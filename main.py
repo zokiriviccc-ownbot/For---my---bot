@@ -1,3 +1,19 @@
+from flask import Flask
+from threading import Thread
+import os
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot ishlayapti!"
+
+def run():
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
 import telebot
 from telebot import types
 import google.generativeai as genai
@@ -163,5 +179,6 @@ def create_ppt_with_images(chat_id,topic,text):
     file="slayd_rasmli.pptx"
     prs.save(file)
     bot.send_document(chat_id,open(file,"rb"))
+keep_alive()
 
 bot.polling()
